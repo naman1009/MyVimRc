@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/naman/Documents'
+let g:netrw_dirhist_2='/home/naman/Documents/godot'
+let g:netrw_dirhist_1='/home/naman/Documents/godot/ToyBoxJam'
+let g:netrw_dirhist_0='/home/naman/Documents/godot/ToyBoxJam/scripts'
+let g:netrw_dirhist_9='/home/naman/Documents/godot/ToyBoxJam/scripts/entities'
+let g:netrw_dirhist_8='/home/naman/Downloads/pythonProject'
+let g:netrw_dirhist_7='/home/naman/Documents/c++/SnakeGame/src/include'
+let g:netrw_dirhist_6='/home/naman/Documents/c++/SnakeGame/src'
+let g:netrw_dirhist_5='/home/naman'
+let g:netrw_dirhist_4='/home/naman/.config/nvim'
