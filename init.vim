@@ -1,36 +1,58 @@
 noremap <C-J> "add"ap
 noremap <C-K> "addkk"ap
 imap <c-bs> <C-w> 
-set nu 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set nu
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4
+set nornu
 set noerrorbells
+set mouse=a
+set autoindent
 set noswapfile
 set nobackup
 set undofile
+set wrap
 set incsearch
 set undodir=~/.vim/undodir
 set backspace=indent,eol,start
 set colorcolumn=80
 set background=dark
+set autochdir
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 imap <s><s>  <Esc>
 noremap <A-K> "add"ap
 noremap <A-J> "add"ap
 imap <c-bs> <C-w>
 noremap <C-c> "+y
-noremap <C-x> "+d
-noremap <C-v> "+P
 noremap <C-d> "_dd
 let g:mapleader=" "
-nmap <Leader>t :NERDTree<CR>
+nmap <Leader>t :NERDTree %<CR>
 nmap <Leader>; <C-w><C-l>
 nmap <Leader>l <C-w><C-k>
 nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
+nmap <Leader>c :Colors<CR>
 nmap <C-p> :Files<CR>
 nmap <Leader>hs :sp<CR>
 nmap <Leader>us :vsp<CR>
+nmap <Leader>n :noh<CR>
+nmap <Leader>m :MaximizerToggle<CR>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+nmap <Leader>dd :call vimspector#Launch()
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dj <Plug>VimspectorStepOver
+nmap <Leader>dk <Plug>VimspectorStepOut
+nmap <Leader>d_ <Plug>VimspectorRestart
+nmap <Leader>drc <Plug>VimspectorRunToCursor
+nmap <Leader>r :RnvimrToggle<CR>
+nmap <Leader>rn <Plug>(coc-rename)
+nmap <Leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:rnvimr_ex_enable = 1
+nmap <Leader>~ <Plug>(coc-terminal-toggle)
 call plug#begin('~/.vim/plugged')
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'mbbill/undotree'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
@@ -51,8 +73,11 @@ Plug 'habamax/vim-godot'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
 " Optional:
 Plug 'honza/vim-snippets'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 call plug#end()
 source ~/.fzf/plugin/fzf.vim
 
@@ -64,9 +89,9 @@ let g:coc_global_extensions = [
   \ 'coc-prettier', 
   \ 'coc-ccls',
   \ 'coc-json', 
+  \ 'coc-omnisharp',
+  \ 'coc-python'
   \ ]
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gr <Plug>(coc-references)
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
@@ -79,9 +104,9 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-colorscheme palenight
+color palenight
 let g:material_theme_style = "ocean-community"
-let g:airline_theme='onehalfdark'
+let g:airline_theme='palenight'
 " lightline
 "ocean let g:lightline = { 'colorscheme': 'onehalfdark' }
 if (has("nvim"))
@@ -96,3 +121,18 @@ if (has("termguicolors"))
   set termguicolors
 endif
 let g:palenight_terminal_italics=1
+let g:NERDTreeDirArrows=0
+if has("autocmd")
+    au InsertEnter *
+        \ if v:insertmode == 'i' |
+        \   silent execute "!gnome-terminal-cursor-shape.sh ibeam" |
+        \ elseif v:insertmode == 'r' |
+        \   silent execute "!gnome-terminal-cursor-shape.sh underline" |
+        \ endif
+    au InsertLeave * silent execute "!gnome-terminal-cursor-shape.sh block"
+    au VimLeave * silent execute "!gnome-terminal-cursor-shape.sh block"
+endif
+let NERDTreeShowHidden=1
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+
+highlight Normal guibg=none
