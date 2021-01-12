@@ -51,6 +51,9 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:rnvimr_ex_enable = 1
 nmap <Leader>~ <Plug>(coc-terminal-toggle)
 call plug#begin('~/.vim/plugged')
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'mbbill/undotree'
 Plug 'drewtempelmeyer/palenight.vim'
@@ -122,17 +125,8 @@ if (has("termguicolors"))
 endif
 let g:palenight_terminal_italics=1
 let g:NERDTreeDirArrows=0
-if has("autocmd")
-    au InsertEnter *
-        \ if v:insertmode == 'i' |
-        \   silent execute "!gnome-terminal-cursor-shape.sh ibeam" |
-        \ elseif v:insertmode == 'r' |
-        \   silent execute "!gnome-terminal-cursor-shape.sh underline" |
-        \ endif
-    au InsertLeave * silent execute "!gnome-terminal-cursor-shape.sh block"
-    au VimLeave * silent execute "!gnome-terminal-cursor-shape.sh block"
-endif
 let NERDTreeShowHidden=1
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
+"#292d3e is the background color set it in your terminal emulator
 highlight Normal guibg=none
