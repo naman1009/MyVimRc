@@ -131,7 +131,7 @@ endif
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
 
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.jsx'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.jsx, *.tsx'
 
 " filenames like *.xml, *.xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
