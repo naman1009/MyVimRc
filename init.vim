@@ -35,7 +35,7 @@ nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
 nmap <Leader>c :Colors<CR>
 nmap <Leader>_d "_dd
-nmap <C-p> :Files<CR>
+nmap <C-p> :find 
 nmap <Leader>hs :sp<CR>
 nmap <Leader>us :vsp<CR>
 nmap <Leader>n :noh<CR>
@@ -55,6 +55,7 @@ nmap <Leader>rnu :set rnu
 nmap <Leader>nu :set nornu
 nmap <Leader>gf :GodotRunFZF<CR>
 nmap <Leader>g :GodotRun<CR>
+imap <C-Bs> <C-w>
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:rnvimr_ex_enable = 1
 nmap <Leader>~ <Plug>(coc-terminal-toggle)
