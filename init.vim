@@ -16,7 +16,8 @@ set undodir=~/.vim/undodir
 set encoding=utf-8
 set backspace=indent,eol,start
 set colorcolumn=80
-set background=dark
+set bg=light
+set background=light
 set path+=**
 set tags+=**
 set tags+=%:p:h
@@ -27,26 +28,19 @@ set spell spelllang=en_us
 "{
 
 let g:gruvbox_italic=1
-
+let python_highlight_all = 1
+let python_highlight_space_errors=0
 let g:closetag_shortcut = '>'
-
 let g:coc_snippet_next = '<tab>'
-
 let g:closetag_regions = {
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
     \ 'javascript.jsx': 'jsxRegion',
     \ }
-
 let g:closetag_emptyTags_caseSensitive = 1
-
 let g:closetag_xhtml_filetypes = 'xhtml,jsx, tsx, md'
-
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *.jsx, *.tsx, *.md'
-
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx, *.tsx, *.md'
-
 let g:closetag_filetypes = 'html,xhtml,phtml,tsx, jsx, md'
-
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
@@ -65,12 +59,13 @@ let g:material_theme_style = 'palenight'
 let g:mapleader=" "
 let g:rnvimr_enable_ex = 1
 let g:vimspector_enable_mappings = 'HUMAN'
-let g:gruvbox_contrast_hard=1
+let g:gruvbox_contrast_light=1
 let g:airline#extensions#tabline#enabled = 1
 let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 let g:molokai_original = 1
 "}
+
 "mappings
 "{
 filetype plugin on
@@ -99,10 +94,15 @@ nmap <Leader>dd :call vimspector#Launch()
 nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 nmap <Leader>dk <Plug>VimspectorStepOut
+nmap <C-s> :w<CR>
+nmap <C-w> :q!<CR>
+noremap <C-q> :wq<CR>
+nmap <Leader>sr :w 
 nmap <Leader>d_ <Plug>VimspectorRestart
 nmap <Leader>drc <Plug>VimspectorRunToCursor
 nmap <Leader>r :RnvimrToggle<CR>
 nmap <Leader>rn <Plug>(coc-rename)
+nmap <Leader>ff :CocCommand prettier.formatFile<CR>
 nmap <Leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <Leader>rnu :set rnu
 nmap <Leader>nu :set nornu
@@ -114,7 +114,10 @@ vmap <C-_>   gc
 noremap <C-J> "add"ap
 noremap <C-K> "addkk"ap
 imap <C-H> <C-w>
-
+vmap <Leader>' s'
+nmap <Leader>' ysiw'
+vmap <Leader>" s"
+nmap <Leader>" ysiw"
 nmap ga :normal ggVG<CR>
 
 nmap <Leader>~ <Plug>(coc-terminal-toggle)
@@ -122,13 +125,20 @@ nmap <Leader>~ <Plug>(coc-terminal-toggle)
 "autocmds
 "{
 autocmd FileType markdown set wrap
+autocmd BufWritePre jsx CocCommand prettier.formatFile
+autocmd BufWritePre javascript CocCommand prettier.formatFile
+autocmd BufWritePre typescript CocCommand prettier.formatFile
+autocmd BufWritePre tsx CocCommand prettier.formatFile
 "}
 
 "plugins
 "{
 call plug#begin('~/.vim/plugged')
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'dracula/vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'liuchengxu/vim-which-key'
+Plug 'hdima/python-syntax'
+Plug 'uiiaoo/java-syntax.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-latex/vim-latex'
@@ -136,7 +146,6 @@ Plug 'goballooning/vim-live-latex-preview'
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tomasr/molokai'
-Plug 'vim-python/python-syntax'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'CaffeineViking/vim-glsl'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
@@ -184,7 +193,7 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-colorscheme gruvbox
+colorscheme onedark
 " lightline
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
