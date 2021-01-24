@@ -54,7 +54,7 @@ let g:coc_global_extensions = [
   \ 'coc-texlab'
   \ ]
 let g:material_terminal_italics = 1
-let g:material_theme_style = 'palenight'
+let g:material_theme_style = 'lighter'
 let g:mapleader=" "
 let g:rnvimr_enable_ex = 1
 let g:vimspector_enable_mappings = 'HUMAN'
@@ -82,7 +82,7 @@ nmap <Leader>l <C-w><C-k>
 nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
 nmap <Leader>_d "_dd
-nmap <C-p> :find 
+nmap <C-p> :Files<CR>
 nmap <Leader>hs :sp<CR>
 nmap <Leader>us :vsp<CR>
 nmap <Leader>n :noh<CR>
@@ -108,9 +108,11 @@ nmap <Leader>g :GodotRun<CR>
 nmap <Tab> gt
 nmap <C-_> gcc
 vmap <C-_>   gc
+imap <C-_> <ESC>gcci
 noremap <C-J> "add"ap
 noremap <C-K> "addkk"ap
 imap <C-H> <C-w>
+nmap <C-H> "+diw 
 vmap <Leader>' s'
 nmap <Leader>' ysiw'
 vmap <Leader>" s"
@@ -133,6 +135,9 @@ autocmd FileType tex set spell spelllang=en_us
 "plugins
 "{
 call plug#begin('~/.vim/plugged')
+Plug 'kba/vim-eclipse-color'
+Plug 'sickill/vim-monokai'
+Plug 'dunstontc/vim-vscode-theme'
 Plug 'dracula/vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'liuchengxu/vim-which-key'
@@ -238,3 +243,4 @@ let NERDTreeShowHidden=1
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 "#292d3e is the background color set it in your terminal emulator
+hi Normal guibg=none ctermbg=NONE
