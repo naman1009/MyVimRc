@@ -22,7 +22,6 @@ set path+=**
 set tags+=**
 set tags+=%:p:h
 set guifont=Liberation\ Mono\ for\ Powerline\ 12
-set spell spelllang=en_us
 "}
 "lets 
 "{
@@ -95,8 +94,6 @@ nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 nmap <Leader>dk <Plug>VimspectorStepOut
 nmap <C-s> :w<CR>
-nmap <C-w> :q!<CR>
-noremap <C-q> :wq<CR>
 nmap <Leader>sr :w 
 nmap <Leader>d_ <Plug>VimspectorRestart
 nmap <Leader>drc <Plug>VimspectorRunToCursor
@@ -129,6 +126,8 @@ autocmd BufWritePre jsx CocCommand prettier.formatFile
 autocmd BufWritePre javascript CocCommand prettier.formatFile
 autocmd BufWritePre typescript CocCommand prettier.formatFile
 autocmd BufWritePre tsx CocCommand prettier.formatFile
+autocmd FileType markdown set spell spelllang=en_us
+autocmd FileType tex set spell spelllang=en_us
 "}
 
 "plugins
