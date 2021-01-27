@@ -2,6 +2,7 @@
 "{
 set nu
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4
+set foldmethod=indent
 set rnu
 set noerrorbells
 set mouse=a
@@ -51,7 +52,8 @@ let g:coc_global_extensions = [
   \ 'coc-omnisharp',
   \ 'coc-python',
   \ 'coc-java',
-  \ 'coc-texlab'
+  \ 'coc-texlab',
+  \ 'coc-explorer'
   \ ]
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'lighter'
@@ -73,11 +75,15 @@ noremap <A-K> "add"ap
 noremap <A-J> "add"ap
 imap <c-bs> <C-w>
 noremap <C-c> "+y
+nmap <Leader>e :CocCommand explorer<CR>
 nmap <Leader>t :NERDTree %<CR>
+nmap <Leader>^[[A :normal zc
+nmap <Leader>^[[B :normal zo
 nmap <Leader>T :tabedit 
 nmap <Leader>cs cstt
 nmap <Leader>ds dst
 nmap <Leader>; <C-w><C-l>
+nmap <C-t> :tabedit<CR>
 nmap <Leader>l <C-w><C-k>
 nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
@@ -89,7 +95,7 @@ nmap <Leader>n :noh<CR>
 nmap <Leader>m :MaximizerToggle<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
-nmap <Leader>dd :call vimspector#Launch()
+nmap <Leader>dd :call vimspector#Launch()<CR>
 nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 nmap <Leader>dk <Plug>VimspectorStepOut
@@ -101,8 +107,8 @@ nmap <Leader>r :RnvimrToggle<CR>
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>ff :CocCommand prettier.formatFile<CR>
 nmap <Leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
-nmap <Leader>rnu :set rnu
-nmap <Leader>nu :set nornu
+nmap <Leader>rnu :set rnu<CR>
+nmap <Leader>nu :set nornu<CR>
 nmap <Leader>gf :GodotRunFZF<CR>
 nmap <Leader>g :GodotRun<CR>
 nmap <Tab> gt
@@ -130,11 +136,14 @@ autocmd BufWritePre typescript CocCommand prettier.formatFile
 autocmd BufWritePre tsx CocCommand prettier.formatFile
 autocmd FileType markdown set spell spelllang=en_us
 autocmd FileType tex set spell spelllang=en_us
+autocmd BufWinEnter * :normal 100zr
 "}
 
 "plugins
 "{
 call plug#begin('~/.vim/plugged')
+Plug 'OrangeT/vim-csharp'
+Plug 'ryanoasis/vim-devicons'
 Plug 'kba/vim-eclipse-color'
 Plug 'sickill/vim-monokai'
 Plug 'dunstontc/vim-vscode-theme'
@@ -168,10 +177,6 @@ Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
