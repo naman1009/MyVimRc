@@ -58,13 +58,13 @@ let g:coc_global_extensions = [
 let g:material_terminal_italics = 1
 let g:material_theme_style = 'lighter'
 let g:mapleader=" "
-let g:rnvimr_enable_ex = 1
 let g:vimspector_enable_mappings = 'HUMAN'
 let g:gruvbox_contrast_light=1
 let g:airline#extensions#tabline#enabled = 1
 let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 let g:molokai_original = 1
+let maplocalleader='\'
 "}
 
 "mappings
@@ -77,11 +77,13 @@ imap <c-bs> <C-w>
 noremap <C-c> "+y
 nmap <Leader>e :CocCommand explorer<CR>
 nmap <Leader>t :NERDTree %<CR>
-nmap <Leader>^[[A :normal zc
-nmap <Leader>^[[B :normal zo
+nmap <Leader><UP> :normal zc<CR>
+nmap <Leader><DOWN> :normal zo<CR>
+nmap <S><S> :Files<CR>
 nmap <Leader>T :tabedit 
 nmap <Leader>cs cstt
 nmap <Leader>ds dst
+imap <localleader><localleader> <Esc>
 nmap <Leader>; <C-w><C-l>
 nmap <C-t> :tabedit<CR>
 nmap <Leader>l <C-w><C-k>
@@ -89,6 +91,7 @@ nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
 nmap <Leader>_d "_dd
 nmap <C-p> :Files<CR>
+imap <A-?> <C-u>
 nmap <Leader>hs :sp<CR>
 nmap <Leader>us :vsp<CR>
 nmap <Leader>n :noh<CR>
@@ -99,7 +102,7 @@ nmap <Leader>dd :call vimspector#Launch()<CR>
 nmap <Leader>dl <Plug>VimspectorStepInto
 nmap <Leader>dj <Plug>VimspectorStepOver
 nmap <Leader>dk <Plug>VimspectorStepOut
-nmap <C-s> :w<CR>
+nmap <Leader>fs :w<CR>
 nmap <Leader>sr :w 
 nmap <Leader>d_ <Plug>VimspectorRestart
 nmap <Leader>drc <Plug>VimspectorRunToCursor
@@ -123,6 +126,8 @@ vmap <Leader>' s'
 nmap <Leader>' ysiw'
 vmap <Leader>" s"
 nmap <Leader>" ysiw"
+nmap <Leader>w :vsp<CR>
+nmap <Leader>hw :sp<CR>
 nmap ga :normal ggVG<CR>
 
 nmap <Leader>~ <Plug>(coc-terminal-toggle)
@@ -139,10 +144,16 @@ autocmd FileType tex set spell spelllang=en_us
 autocmd BufWinEnter * :normal 100zr
 "}
 
+" commands
+" {
+ command! Init :e ~/init.vim
+" }
 "plugins
 "{
 call plug#begin('~/.vim/plugged')
+
 Plug 'OrangeT/vim-csharp'
+Plug 'liuchengxu/space-vim-dark'
 Plug 'ryanoasis/vim-devicons'
 Plug 'kba/vim-eclipse-color'
 Plug 'sickill/vim-monokai'
@@ -249,3 +260,4 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 "#292d3e is the background color set it in your terminal emulator
 hi Normal guibg=none ctermbg=NONE
+hi Comment cterm=italic

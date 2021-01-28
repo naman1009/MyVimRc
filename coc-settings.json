@@ -9,7 +9,6 @@
     "pairs.enableCharacters": ["(", "[", "{", "'", "\"", "`"],
     "coc.preferences.formatOnSaveFiletypes": [
         "css",
-        "markdown",
         "jsx",
         "tsx",
         "js",
