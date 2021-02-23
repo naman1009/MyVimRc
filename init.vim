@@ -6,6 +6,7 @@ set foldmethod=indent
 set rnu
 set noerrorbells
 set mouse=a
+set timeoutlen=200
 set autoindent
 set noswapfile
 set nobackup
@@ -16,9 +17,8 @@ set incsearch
 set undodir=~/.vim/undodir
 set encoding=utf-8
 set backspace=indent,eol,start
-set colorcolumn=80
-set bg=light
-set background=light
+set bg=dark
+set background=dark
 set path+=**
 set tags+=**
 set tags+=%:p:h
@@ -28,8 +28,6 @@ set guifont=Liberation\ Mono\ for\ Powerline\ 12
 "{
 
 let g:gruvbox_italic=1
-let python_highlight_all = 1
-let python_highlight_space_errors=0
 let g:closetag_shortcut = '>'
 let g:coc_snippet_next = '<tab>'
 let g:closetag_regions = {
@@ -47,25 +45,30 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
-  \ 'coc-ccls',
+  \ 'coc-clangd',
   \ 'coc-json', 
   \ 'coc-omnisharp',
   \ 'coc-python',
   \ 'coc-java',
   \ 'coc-texlab',
-  \ 'coc-explorer'
+  \ 'coc-explorer',
+  \ 'coc-lua'
   \ ]
 let g:material_terminal_italics = 1
-let g:material_theme_style = 'lighter'
+let g:material_theme_style = 'default'
 let g:mapleader=" "
 let g:vimspector_enable_mappings = 'HUMAN'
-let g:gruvbox_contrast_light=1
+let g:gruvbox_contrast_hard=1
 let g:airline#extensions#tabline#enabled = 1
 let g:Powerline_symbols = 'fancy'
 let g:airline_powerline_fonts = 1
 let g:molokai_original = 1
 let maplocalleader='\'
+let ayucolor = "mirage"
+let g:indentLine_char = '>>'
+let g:indentLine_first_char = '>>'
 "}
+
 
 "mappings
 "{
@@ -75,12 +78,16 @@ noremap <A-K> "add"ap
 noremap <A-J> "add"ap
 imap <c-bs> <C-w>
 noremap <C-c> "+y
-nmap <Leader>e :CocCommand explorer<CR>
+nmap <Silent><Leader>e :CocCommand explorer<CR>
+nmap <silent><Leader>co :Colors<CR>
 nmap <Leader>t :NERDTree %<CR>
-nmap <Leader><UP> :normal zc<CR>
-nmap <Leader><DOWN> :normal zo<CR>
-nmap <S><S> :Files<CR>
+nmap <Leader>I :e! ~/init.vim<CR>
+nmap <Leader><UP> zc
+nmap <Leader><DOWN> zo
+nmap <S><S> :Files!<CR>
 nmap <Leader>T :tabedit 
+nmap <silent><Leader>bo :Buffers!<CR>
+nmap <silent><Leader>ro :Rg!<CR>
 nmap <Leader>cs cstt
 nmap <Leader>ds dst
 imap <localleader><localleader> <Esc>
@@ -89,12 +96,12 @@ nmap <C-t> :tabedit<CR>
 nmap <Leader>l <C-w><C-k>
 nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
-nmap <Leader>_d "_dd
+nmap <Leader>_d "_d
 nmap <C-p> :Files<CR>
 imap <A-?> <C-u>
 nmap <Leader>hs :sp<CR>
 nmap <Leader>us :vsp<CR>
-nmap <Leader>n :noh<CR>
+nmap <silent><Leader>n :noh<CR>
 nmap <Leader>m :MaximizerToggle<CR>
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gr <Plug>(coc-references)
@@ -106,34 +113,41 @@ nmap <Leader>fs :w<CR>
 nmap <Leader>sr :w 
 nmap <Leader>d_ <Plug>VimspectorRestart
 nmap <Leader>drc <Plug>VimspectorRunToCursor
-nmap <Leader>r :RnvimrToggle<CR>
+nmap <Leader>ro :RnvimrToggle<CR>
 nmap <Leader>rn <Plug>(coc-rename)
 nmap <Leader>ff :CocCommand prettier.formatFile<CR>
 nmap <Leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <Leader>rnu :set rnu<CR>
 nmap <Leader>nu :set nornu<CR>
+nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 nmap <Leader>gf :GodotRunFZF<CR>
 nmap <Leader>g :GodotRun<CR>
 nmap <Tab> gt
 nmap <C-_> gcc
 vmap <C-_>   gc
 imap <C-_> <ESC>gcci
-noremap <C-J> "add"ap
-noremap <C-K> "addkk"ap
 imap <C-H> <C-w>
+nmap <C-j> ddp
+nmap <C-k> ddkP
 nmap <C-H> "+diw 
+nmap <Leader>pf :
+vmap <C-j> djp
 vmap <Leader>' s'
 nmap <Leader>' ysiw'
 vmap <Leader>" s"
 nmap <Leader>" ysiw"
 nmap <Leader>w :vsp<CR>
 nmap <Leader>hw :sp<CR>
+nmap <silent><Leader>fo :Files<CR>
 nmap ga :normal ggVG<CR>
-
-nmap <Leader>~ <Plug>(coc-terminal-toggle)
+nmap <silent><Leader>sp :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nmap <silent><Leader>to <Plug>(coc-terminal-toggle)
+nnoremap Q <ESC>
 "}
 "autocmds
 "{
+
+autocmd FileType cs setlocal commentstring=//%s
 autocmd FileType markdown set wrap
 autocmd BufWritePre jsx CocCommand prettier.formatFile
 autocmd BufWritePre javascript CocCommand prettier.formatFile
@@ -144,31 +158,53 @@ autocmd FileType tex set spell spelllang=en_us
 autocmd BufWinEnter * :normal 100zr
 "}
 
+"Lua
+"{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { "gdscript", "gd" },  -- list of language that will be disabled
+  },
+}
+EOF
+"}
 " commands
 " {
- command! Init :e ~/init.vim
+command! Init :e! ~/init.vim
 " }
 "plugins
 "{
 call plug#begin('~/.vim/plugged')
 
-Plug 'OrangeT/vim-csharp'
+Plug 'tpope/vim-fugitive'
+Plug 'calviken/vim-gdscript3'
+Plug 'ayu-theme/ayu-vim'
+Plug 'rakr/vim-one'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'preservim/nerdtree'
+Plug 'tjdevries/gruvbuddy.nvim'
+Plug 'tjdevries/colorbuddy.vim'
 Plug 'liuchengxu/space-vim-dark'
 Plug 'ryanoasis/vim-devicons'
-Plug 'kba/vim-eclipse-color'
 Plug 'sickill/vim-monokai'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'dracula/vim'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'epilande/vim-react-snippets'
 Plug 'arcticicestudio/nord-vim'
 Plug 'liuchengxu/vim-which-key'
-Plug 'hdima/python-syntax'
-Plug 'uiiaoo/java-syntax.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'sainnhe/gruvbox-material'
 Plug 'junegunn/fzf.vim'
 Plug 'vim-latex/vim-latex'
+Plug 'epilande/vim-es2015-snippets'
 Plug 'goballooning/vim-live-latex-preview'
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 Plug 'tomasr/molokai'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'CaffeineViking/vim-glsl'
@@ -195,7 +231,6 @@ Plug 'ThePrimeagen/vim-be-good'
 Plug 'habamax/vim-godot'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
 Plug 'szw/vim-maximizer'
 Plug 'honza/vim-snippets'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
@@ -213,7 +248,9 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-colorscheme onedark
+" lua require('colorbuddy').colorscheme('gruvbuddy')
+colorscheme gruvbox-material
+
 " lightline
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -259,5 +296,5 @@ let NERDTreeShowHidden=1
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
 
 "#292d3e is the background color set it in your terminal emulator
-hi Normal guibg=none ctermbg=NONE
+" hi Normal guibg=none ctermbg=NONE
 hi Comment cterm=italic

@@ -20,27 +20,14 @@
     ],
     "prettier.tabWidth": 4,
     "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": ["c", "h", "hpp", "cpp", "objc", "objcpp"],
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                }
-            }
-        },
-
         "godot": {
             "host": "127.0.0.1",
             "filetypes": ["gdscript"],
             "port": 6008
         }
-    }
+    },
+    "snippets.ultisnips.directories": [
+        "UltiSnips",
+        "~/.vim/plugged/vim-snippets/UltiSnips"
+    ]
 }
