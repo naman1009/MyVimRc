@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-"sets
-"{
-set nu
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4
-set foldmethod=indent
-set rnu
-=======
 
+"version 1.0
 "sets
 "{
 set nu
@@ -21,7 +14,6 @@ set foldmethod=indent
 set foldnestmax=10
 set nofoldenable
 set foldlevel=2
->>>>>>> b3218ca (my vimrc)
 set noerrorbells
 set mouse=a
 set timeoutlen=200
@@ -63,11 +55,7 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
-<<<<<<< HEAD
-  \ 'coc-clangd',
-=======
   \ 'coc-ccls',
->>>>>>> b3218ca (my vimrc)
   \ 'coc-json', 
   \ 'coc-omnisharp',
   \ 'coc-python',
@@ -77,15 +65,6 @@ let g:coc_global_extensions = [
   \ 'coc-lua'
   \ ]
 let g:material_terminal_italics = 1
-<<<<<<< HEAD
-let g:material_theme_style = 'default'
-let g:mapleader=" "
-let g:vimspector_enable_mappings = 'HUMAN'
-let g:gruvbox_contrast_hard=1
-let g:airline#extensions#tabline#enabled = 1
-let g:Powerline_symbols = 'fancy'
-let g:airline_powerline_fonts = 1
-=======
 let g:material_theme_style = 'palenight'
 let g:mapleader=" "
 let g:gruvbox_contrast_hard=1
@@ -101,7 +80,6 @@ let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 
 let g:Powerline_symbols = 'fancy'
->>>>>>> b3218ca (my vimrc)
 let g:molokai_original = 1
 let maplocalleader='\'
 let ayucolor = "mirage"
@@ -109,15 +87,6 @@ let g:indentLine_char = '>>'
 let g:indentLine_first_char = '>>'
 "}
 
-<<<<<<< HEAD
-
-"mappings
-"{
-filetype plugin on
-highlight ColorColumn ctermbg=0 guibg=lightgrey
-noremap <A-K> "add"ap
-noremap <A-J> "add"ap
-=======
 "mappings
 "{
 highlight ColorColumn ctermbg=0 guibg=lightgrey
@@ -145,18 +114,14 @@ noremap <A-J> "add"ap
 nmap L $
 nmap <Leader>po <C-^>
 nmap H ^
->>>>>>> b3218ca (my vimrc)
 imap <c-bs> <C-w>
 noremap <C-c> "+y
 nmap <Silent><Leader>e :CocCommand explorer<CR>
 nmap <silent><Leader>co :Colors<CR>
 nmap <Leader>t :NERDTree %<CR>
 nmap <Leader>I :e! ~/init.vim<CR>
-<<<<<<< HEAD
-=======
 nmap <Leader>> <C-w>>
 nmap <Leader>< <C-w><
->>>>>>> b3218ca (my vimrc)
 nmap <Leader><UP> zc
 nmap <Leader><DOWN> zo
 nmap <S><S> :Files!<CR>
@@ -166,15 +131,6 @@ nmap <silent><Leader>ro :Rg!<CR>
 nmap <Leader>cs cstt
 nmap <Leader>ds dst
 imap <localleader><localleader> <Esc>
-<<<<<<< HEAD
-nmap <Leader>; <C-w><C-l>
-nmap <C-t> :tabedit<CR>
-nmap <Leader>l <C-w><C-k>
-nmap <Leader>k <C-w><C-j>
-nmap <Leader>j <C-w><C-h>
-nmap <Leader>_d "_d
-nmap <C-p> :Files<CR>
-=======
 nmap <C-t> :tabedit<CR>
 imap <C-t> \\:tabedit<CR>i
 nmap <Leader>; <C-w><C-l>
@@ -183,20 +139,16 @@ nmap <Leader>k <C-w><C-j>
 nmap <Leader>j <C-w><C-h>
 nmap <Leader>_d "_d
 nmap <C-p> :CtrlP<CR>
->>>>>>> b3218ca (my vimrc)
 imap <A-?> <C-u>
 nmap <Leader>hs :sp<CR>
 nmap <Leader>us :vsp<CR>
 nmap <silent><Leader>n :noh<CR>
 nmap <Leader>m :MaximizerToggle<CR>
 nmap <silent> gd <Plug>(coc-definition)
-<<<<<<< HEAD
-=======
 nmap <silent> gdt :tabedit % <CR> <Plug>(coc-definition)
 nmap <silent> gdv :vsp % <CR> <Plug>(coc-definition)
 nmap <silent> gdh :sp % <CR> <Plug>(coc-definition)
 
->>>>>>> b3218ca (my vimrc)
 nmap <silent> gr <Plug>(coc-references)
 nmap <Leader>dd :call vimspector#Launch()<CR>
 nmap <Leader>dl <Plug>VimspectorStepInto
@@ -241,11 +193,8 @@ nnoremap Q <ESC>
 "{
 
 autocmd FileType cs setlocal commentstring=//%s
-<<<<<<< HEAD
-=======
 autocmd Filetype gdscript set noexpandtab
 autocmd FileType cpp setlocal commentstring=//%s
->>>>>>> b3218ca (my vimrc)
 autocmd FileType markdown set wrap
 autocmd BufWritePre jsx CocCommand prettier.formatFile
 autocmd BufWritePre javascript CocCommand prettier.formatFile
@@ -254,11 +203,8 @@ autocmd BufWritePre tsx CocCommand prettier.formatFile
 autocmd FileType markdown set spell spelllang=en_us
 autocmd FileType tex set spell spelllang=en_us
 autocmd BufWinEnter * :normal 100zr
-<<<<<<< HEAD
-=======
 autocmd FileType java nmap <Leader>io :CocCommand java.action.organizeImports<CR>
 autocmd FileType cpp nmap <Leader>ho :CocCommand clangd.switchSourceHeader<CR>
->>>>>>> b3218ca (my vimrc)
 "}
 
 "Lua
@@ -268,20 +214,13 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,              -- false will disable the whole extension
-<<<<<<< HEAD
-    disable = { "gdscript", "gd" },  -- list of language that will be disabled
-=======
     -- disable = { "cpp", },  -- list of language that will be disabled
->>>>>>> b3218ca (my vimrc)
   },
 }
 EOF
 "}
 " commands
-<<<<<<< HEAD
-=======
 "
->>>>>>> b3218ca (my vimrc)
 " {
 command! Init :e! ~/init.vim
 " }
@@ -290,9 +229,6 @@ command! Init :e! ~/init.vim
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive'
-<<<<<<< HEAD
-Plug 'calviken/vim-gdscript3'
-=======
 Plug 'vim-jp/vim-cpp'
 Plug 'Th3Whit3Wolf/onebuddy'
 Plug 'calviken/vim-gdscript3'
@@ -301,7 +237,6 @@ Plug 'kien/ctrlp.vim'
 Plug 'quark-zju/vim-cpp-auto-include'
 Plug 'ryanoasis/vim-devicons'
 Plug 'doums/darcula'
->>>>>>> b3218ca (my vimrc)
 Plug 'ayu-theme/ayu-vim'
 Plug 'rakr/vim-one'
 Plug 'nvim-treesitter/nvim-treesitter'
@@ -309,10 +244,6 @@ Plug 'preservim/nerdtree'
 Plug 'tjdevries/gruvbuddy.nvim'
 Plug 'tjdevries/colorbuddy.vim'
 Plug 'liuchengxu/space-vim-dark'
-<<<<<<< HEAD
-Plug 'ryanoasis/vim-devicons'
-=======
->>>>>>> b3218ca (my vimrc)
 Plug 'sickill/vim-monokai'
 Plug 'dunstontc/vim-vscode-theme'
 Plug 'dracula/vim'
@@ -328,15 +259,8 @@ Plug 'epilande/vim-es2015-snippets'
 Plug 'goballooning/vim-live-latex-preview'
 Plug 'tomasiser/vim-code-dark'
 Plug 'vim-airline/vim-airline-themes'
-<<<<<<< HEAD
-Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tomasr/molokai'
-Plug 'octol/vim-cpp-enhanced-highlight'
-=======
-Plug 'pangloss/vim-javascript'
-Plug 'tomasr/molokai'
->>>>>>> b3218ca (my vimrc)
 Plug 'CaffeineViking/vim-glsl'
 Plug 'kaicataldo/material.vim', { 'branch': 'main' }
 Plug 'MaxMEllon/vim-jsx-pretty'
@@ -358,10 +282,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'morhetz/gruvbox'
 Plug 'ThePrimeagen/vim-be-good'
-<<<<<<< HEAD
-Plug 'habamax/vim-godot'
-=======
->>>>>>> b3218ca (my vimrc)
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'szw/vim-maximizer'
@@ -382,10 +302,6 @@ function! s:check_back_space() abort
 endfunction
 
 " lua require('colorbuddy').colorscheme('gruvbuddy')
-<<<<<<< HEAD
-colorscheme gruvbox-material
-=======
->>>>>>> b3218ca (my vimrc)
 
 " lightline
 if (has("nvim"))
@@ -429,17 +345,9 @@ endif
 let g:palenight_terminal_italics=1
 let g:NERDTreeDirArrows=0
 let NERDTreeShowHidden=1
-<<<<<<< HEAD
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
-
-"#292d3e is the background color set it in your terminal emulator
-" hi Normal guibg=none ctermbg=NONE
-hi Comment cterm=italic
-=======
 let $FZF_DEFAULT_COMMAND = 'find -L'
 
 "#292d3e is the background color set it in your terminal emulator
 color gruvbox-material 
 hi Normal guibg=none ctermbg=NONE
 hi EndOfBuffer guibg=none ctermbg=none
->>>>>>> b3218ca (my vimrc)
