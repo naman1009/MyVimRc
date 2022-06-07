@@ -1,0 +1,25 @@
+{
+
+
+	"pairs.enableCharacters" : ["(", "[", "{", "'", "\"", "`"],
+	"languageserver": {
+		"ccls": {
+		  "command": "ccls",
+		  "filetypes": ["c", "cpp", "objc", "objcpp"],
+		  "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+		  "initializationOptions": {
+			 "cache": {
+			   "directory": "/tmp/ccls"
+			 }
+		   }
+		},
+		"godot": {
+			"host": "127.0.0.1",
+			"filetypes": ["gd", "gdscript3", "gdscript" ],
+			"port": 6008
+		}
+	},
+	"haxe.modulePath":"~/.local/bin/server.js",
+	"diagnostic.displayByAle": true
+
+}
