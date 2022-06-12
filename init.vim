@@ -164,7 +164,7 @@ let g:gruvbox_material_background='hard'
 
 let g:camelcasemotion_key = '<leader>'
 
-let g:material_theme_style = 'palenight'
+let g:material_theme_style = 'onedark'
 
 command Init :e! ~/.config/nvim/init.vim
 command Eval :so ~/init.vim
